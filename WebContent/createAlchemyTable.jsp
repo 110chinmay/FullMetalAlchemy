@@ -64,6 +64,7 @@ function edit(id){
         url: "./CreateAlchemy",
         data: data,
         success: function(data){
+        	
             alert("Request successful");
         },
         error: function (data){

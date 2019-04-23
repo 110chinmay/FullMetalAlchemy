@@ -102,8 +102,11 @@ public class CreateAlchemy extends HttpServlet {
 		String id = request.getParameter("id");
 		DaoAlchemy daoId = new DaoAlchemy();
 		 Brotherhood updateResult = daoId.fetchEdit(id);
-		System.out.println("URL data"+updateResult);
-		System.out.println("Called the edit");
+		 System.out.println("URL data"+updateResult);
+		 request.setAttribute("updateResult", updateResult);
+		 RequestDispatcher rd = request.getRequestDispatcher("editAlchemy.jsp");
+		 rd.forward(request, response);
+		 System.out.println("Called the edit");
 	}
 
 	protected void deleteAlchemy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
