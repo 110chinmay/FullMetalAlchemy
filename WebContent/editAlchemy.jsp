@@ -26,6 +26,9 @@ tr:nth-child(even) {
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
+<script type="text/javascript">
+
+</script>
 <body>
   <c:forEach var="updateResult" items="${list}">
   			<c:out value="${updateResult.EMPLOYEE_ID}" />

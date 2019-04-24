@@ -43,10 +43,10 @@ tr:nth-child(even) {
                     <td><c:out value="${book.LAST_NAME}" /></td>
                     <td><c:out value="${book.EMAIL}" /></td>
                     <td>
-                    <a class='btn btn-success' onclick="edit('${book.EMPLOYEE_ID}')" />Update</a>
+                    <a class='btn btn-warning' href="editAlchemy.jsp?id=<c:out value='${book.EMPLOYEE_ID}' />">Update</a>
                      </td>
                      <td>
-                      <a class='btn btn-warning' href="./CreateAlchemy/deleteAlchemy?id=<c:out value='${book.EMPLOYEE_ID}' />">Delete</a>
+                      <a class='btn btn-warning' href="editAlchemy.jsp?id=<c:out value='${book.EMPLOYEE_ID}' />">Delete</a>
                     </td>
                 </tr>
             </c:forEach>

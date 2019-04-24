@@ -35,11 +35,11 @@ public class CreateAlchemy extends HttpServlet {
 //		 }
 
 
+		String action = request.getServletPath();
 
+		//String action = request.getParameter("update");
 
-		String action = request.getParameter("update");
-
-		System.out.println("called update"+action);
+		System.out.println("called action data for url ===>"+action);
 
 		try {
             switch(action){
@@ -68,7 +68,7 @@ public class CreateAlchemy extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
+		doGet(request, response);
 
 //		String Fname = request.getParameter("Fname");
 //		System.out.println(Fname);
