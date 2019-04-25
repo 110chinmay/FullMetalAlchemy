@@ -9,6 +9,6 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jars"/>
-	<classpathentry kind="lib" path="C:/Users/chinmay/Downloads/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="D:/Chinmay/Software/jstl-1.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
+
 import MastanPOJO.Brotherhood;
 
 /**
@@ -35,9 +38,11 @@ public class CreateAlchemy extends HttpServlet {
 //		 }
 
 
-		String action = request.getServletPath();
+		//String action = request.getServletPath();
 
-		//String action = request.getParameter("update");
+		System.out.println("CAll in the doget method");
+
+		String action = request.getParameter("update");
 
 		System.out.println("called action data for url ===>"+action);
 
@@ -68,7 +73,7 @@ public class CreateAlchemy extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+	//	doGet(request, response);
 
 //		String Fname = request.getParameter("Fname");
 //		System.out.println(Fname);
@@ -99,14 +104,23 @@ public class CreateAlchemy extends HttpServlet {
 	}
 
 	protected void editAlchemy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("In the edit system call for editAlchemy");
 		String id = request.getParameter("id");
 		DaoAlchemy daoId = new DaoAlchemy();
 		 Brotherhood updateResult = daoId.fetchEdit(id);
-		 System.out.println("URL data"+updateResult);
-		 request.setAttribute("updateResult", updateResult);
-		 RequestDispatcher rd = request.getRequestDispatcher("editAlchemy.jsp");
-		 rd.forward(request, response);
-		 System.out.println("Called the edit");
+		 System.out.println("URL data111"+updateResult);
+
+		 response.setCharacterEncoding("UTF-8");
+         response.setContentType("application/json; charset=utf-8");
+
+         Gson gson = new Gson();
+
+         String jsonData = gson.toJson(updateResult);
+
+         PrintWriter out = response.getWriter();
+
+		 System.out.println("URL data222"+updateResult);
+		 out.println(jsonData);
 	}
 
 	protected void deleteAlchemy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

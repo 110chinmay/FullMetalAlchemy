@@ -23,7 +23,7 @@ public class DaoAlchemy {
 			Class.forName("org.sqlite.JDBC");
 
 			//step2 create  the connection object
-		    con = DriverManager.getConnection("jdbc:sqlite:E:\\testdb.db");
+		    con = DriverManager.getConnection("jdbc:sqlite:D:\\testdb.db");
 		     statement = con.createStatement();
 
 		    	statement.execute("CREATE TABLE IF NOT EXISTS employees (EMPLOYEE_ID INTEGER,'FIRST_NAME' TEXT,LAST_NAME TEXT,EMAIL TEXT,PHONE_NUMBER TEXT,HIRE_DATE NUMERIC)");

@@ -43,7 +43,7 @@ tr:nth-child(even) {
                     <td><c:out value="${book.LAST_NAME}" /></td>
                     <td><c:out value="${book.EMAIL}" /></td>
                     <td>
-                    <a class='btn btn-warning' href="editAlchemy.jsp?id=<c:out value='${book.EMPLOYEE_ID}' />">Update</a>
+                    <a class='btn btn-success' href="editAlchemy.jsp?id=<c:out value='${book.EMPLOYEE_ID}' />">Update</a>
                      </td>
                      <td>
                       <a class='btn btn-warning' href="editAlchemy.jsp?id=<c:out value='${book.EMPLOYEE_ID}' />">Delete</a>
@@ -64,7 +64,7 @@ function edit(id){
         url: "./CreateAlchemy",
         data: data,
         success: function(data){
-        	
+
             alert("Request successful");
         },
         error: function (data){
