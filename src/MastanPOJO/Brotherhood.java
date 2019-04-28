@@ -16,6 +16,15 @@ public class Brotherhood {
 	private int MANAGER_ID  ;
 	private int DEPARTMENT_ID  ;
 	
+	public Brotherhood(String fIRST_NAME, String lAST_NAME, String eMAIL, String pHONE_NUMBER) {
+		this.FIRST_NAME = fIRST_NAME;
+		this.LAST_NAME = lAST_NAME;
+		this.EMAIL = eMAIL;
+		this.PHONE_NUMBER = pHONE_NUMBER;
+		
+	}
+	public Brotherhood() {
+	}
 	public int getEMPLOYEE_ID() {
 		return EMPLOYEE_ID;
 	}

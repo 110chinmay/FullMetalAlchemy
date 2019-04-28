@@ -28,8 +28,14 @@ tr:nth-child(even) {
 </head>
 <script type="text/javascript">
 $( document ).ready(function() {
-	alert('Test edit file');
-	var id = '1';
+	
+	var url = window.location.href;
+	//console.log(url);
+	var params;
+	for (var i=0;i<url.length;i++) {
+	    params = url[i].split("=");
+	}
+	var id = params[0]; 
 	var update = 'update';
 	var data = {'id':id,'update':update};
     $.ajax({
@@ -37,7 +43,7 @@ $( document ).ready(function() {
         url: "./CreateAlchemy",
         data: data,
         success: function(data){
-            alert("Request successful");
+      //      alert("Request successful");
             console.log(data);
             $('#Fname').val(data.FIRST_NAME);
             $('#Lname').val(data.LAST_NAME);

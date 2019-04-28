@@ -32,19 +32,26 @@ public class CreateAlchemy extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-//		 try {
-//	            switch(){}
-//		 }
-
-
-		//String action = request.getServletPath();
+		
+	String action = null;
 
 		System.out.println("CAll in the doget method");
+		
+		String test = request.getParameter("update");
+		System.out.println("request get parameter test"+test);
 
-		String action = request.getParameter("update");
-
-		System.out.println("called action data for url ===>"+action);
+		
+		if("update".equals(request.getParameter("update"))) {
+			System.out.println("In if call");
+			action = request.getParameter("update");
+			System.out.println("called action data for url ===>"+action);
+		}
+		
+		else if("update".equals(request.getParameter("delete"))) {
+			 action = request.getParameter("delete");
+			System.out.println("called action data for url ===>"+action);
+		}
+		
 
 		try {
             switch(action){
@@ -62,10 +69,6 @@ public class CreateAlchemy extends HttpServlet {
             throw new ServletException(ex);
         }
 
-//		String action = request.getServletPath();
-//		System.out.println("In the get call for action"+action);
-
-		//System.out.println("In the get call");
 	}
 
 	/**
@@ -75,32 +78,58 @@ public class CreateAlchemy extends HttpServlet {
 		// TODO Auto-generated method stub
 	//	doGet(request, response);
 
-//		String Fname = request.getParameter("Fname");
-//		System.out.println(Fname);
-//		String Lname = request.getParameter("Lname");
-//		System.out.println(Lname);
-//		String email = request.getParameter("email");
-//		System.out.println(email);
-//		String pwd = request.getParameter("pwd");
-//		System.out.println(pwd);
+		String Fname = request.getParameter("Fname");
+		System.out.println(Fname);
+		String Lname = request.getParameter("Lname");
+		System.out.println(Lname);
+		String email = request.getParameter("email");
+		System.out.println(email);
+		String phone = request.getParameter("phone");
+		System.out.println(phone);
 //		String checkbox = request.getParameter("checkbox");
 //		String optradio = request.getParameter("optradio");
 //		String selected = request.getParameter("selected");
-        PrintWriter pw = response.getWriter();
+		
+		
+		
+		Brotherhood bh = new Brotherhood(Fname,Lname,email,phone);
+		DaoAlchemy doaInsert = new DaoAlchemy();
+		String result;
+		try {
+			result = doaInsert.insert(bh);
+			System.out.println(result);
+			
+			 response.setCharacterEncoding("UTF-8");
+	         response.setContentType("application/json; charset=utf-8");
 
-		DaoAlchemy dbconfig = new DaoAlchemy();
-		Connection status = dbconfig.open();
-		if(status != null){
-			 List<Brotherhood> ls = dbconfig.fetchAllData();
+	         Gson gson = new Gson();
+
+	         String jsonData = gson.toJson(result);
+
+	         PrintWriter out = response.getWriter();
+	         
+	    	 System.out.println("URL data222"+result);
+			 out.println("JSON reponse for the servlet in INSERT"+jsonData);
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				
+		
+		
+       PrintWriter pw = response.getWriter();
+
+		/*DaoAlchemy dbconfig = new DaoAlchemy();
+		Connection status = doaInsert.open();
+		if(status != null){*/
+			 List<Brotherhood> ls = doaInsert.fetchAllData();
 			System.out.println(ls);
 
 			request.setAttribute("list", ls);
 			RequestDispatcher rd = request.getRequestDispatcher("createAlchemyTable.jsp");
 
 			rd.forward(request, response);
-		}
-		System.out.println("status status"+status);
-
 	}
 
 	protected void editAlchemy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
