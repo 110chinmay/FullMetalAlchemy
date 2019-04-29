@@ -26,38 +26,6 @@ tr:nth-child(even) {
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<script type="text/javascript">
-$( document ).ready(function() {
-	
-	var url = window.location.href;
-	//console.log(url);
-	var params;
-	for (var i=0;i<url.length;i++) {
-	    params = url[i].split("=");
-	}
-	var id = params[0]; 
-	var update = 'update';
-	var data = {'id':id,'update':update};
-    $.ajax({
-        type: "GET",
-        url: "./CreateAlchemy",
-        data: data,
-        success: function(data){
-      //      alert("Request successful");
-            console.log(data);
-            $('#Fname').val(data.FIRST_NAME);
-            $('#Lname').val(data.LAST_NAME);
-            $('#email').val(data.EMAIL);
-            $('#phone').val(data.PHONE_NUMBER);
-
-        },
-        error: function (data){
-            alert("Request failed!");
-        }
-    });
-});
-
-</script>
 <body>
   <c:forEach var="updateResult" items="${list}">
   			<c:out value="${updateResult.EMPLOYEE_ID}" />
@@ -65,7 +33,7 @@ $( document ).ready(function() {
             </c:forEach>
 <div class="container">
   <h2>FullMetal Update</h2>
-  <form action="./CreateAlchemy" method="post">
+
   	<div class="row">
 	  	<div class="col-sm-4">
 	      <label for="Fname">FirstName:</label>
@@ -88,10 +56,53 @@ $( document ).ready(function() {
 		    </div>
   		</div>
 	<div class = 'row' style="margin-top: 15px;margin-left: 0px">
-		 <button type="submit" class="btn btn-default">Submit</button>
+		 <button onclick="update();" class="btn btn-default">Submit</button>
 	</div>
 
-  </form>
 </div>
 </body>
+<script>
+
+$( document ).ready(function() {
+
+	var url = window.location.href;
+	//console.log(url);
+	var params;
+	for (var i=0;i<url.length;i++) {
+	    params = url[i].split("=");
+	}
+	var id = params[0];
+	var fetch = 'fetch';
+	var data = {'id':id,'fetch':fetch};
+    $.ajax({
+        type: "GET",
+        url: "./CreateAlchemy",
+        data: data,
+        success: function(data){
+      //      alert("Request successful");
+            console.log(data);
+            $('#Fname').val(data.FIRST_NAME);
+            $('#Lname').val(data.LAST_NAME);
+            $('#email').val(data.EMAIL);
+            $('#phone').val(data.PHONE_NUMBER);
+
+        },
+        error: function (data){
+            alert("Request failed!");
+        }
+    });
+});
+
+
+function update(){
+	  var fname=$('#Fname').val();
+	  var lname=$('#Lname').val();
+	  var email=$('#email').val();
+	  var phone=$('#phone').val();
+
+	  var data = {'fname':fname,'lname':lname,'email':email,'phone':phone};
+
+	  console.log(data);
+}
+</script>
 </html>

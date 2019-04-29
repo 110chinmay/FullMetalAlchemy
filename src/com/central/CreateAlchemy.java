@@ -32,37 +32,44 @@ public class CreateAlchemy extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+
 	String action = null;
 
 		System.out.println("CAll in the doget method");
-		
-		String test = request.getParameter("update");
+
+		String test = request.getParameter("fetch");
 		System.out.println("request get parameter test"+test);
 
-		
-		if("update".equals(request.getParameter("update"))) {
+
+		if("fetch".equals(request.getParameter("fetch"))) {
+			System.out.println("In if call");
+			action = request.getParameter("fetch");
+			System.out.println("called action data for url ===>"+action);
+		}
+		else if("delete".equals(request.getParameter("delete"))) {
+			 action = request.getParameter("delete");
+			System.out.println("called action data for url ===>"+action);
+		}
+		else if("update".equals(request.getParameter("update"))) {
 			System.out.println("In if call");
 			action = request.getParameter("update");
 			System.out.println("called action data for url ===>"+action);
 		}
-		
-		else if("update".equals(request.getParameter("delete"))) {
-			 action = request.getParameter("delete");
-			System.out.println("called action data for url ===>"+action);
-		}
-		
+
 
 		try {
             switch(action){
             case "null":
             	doPost(request,response);
                 break;
-            case "update":
+            case "fetch":
             	editAlchemy(request,response);
                 break;
             case "delete":
                 deleteAlchemy(request, response);
+                break;
+            case "update":
+            	updateAlchemy(request,response);
                 break;
             }
 	 } catch (Exception ex) {
@@ -89,16 +96,16 @@ public class CreateAlchemy extends HttpServlet {
 //		String checkbox = request.getParameter("checkbox");
 //		String optradio = request.getParameter("optradio");
 //		String selected = request.getParameter("selected");
-		
-		
-		
+
+
+
 		Brotherhood bh = new Brotherhood(Fname,Lname,email,phone);
 		DaoAlchemy doaInsert = new DaoAlchemy();
 		String result;
 		try {
 			result = doaInsert.insert(bh);
 			System.out.println(result);
-			
+
 			 response.setCharacterEncoding("UTF-8");
 	         response.setContentType("application/json; charset=utf-8");
 
@@ -107,7 +114,7 @@ public class CreateAlchemy extends HttpServlet {
 	         String jsonData = gson.toJson(result);
 
 	         PrintWriter out = response.getWriter();
-	         
+
 	    	 System.out.println("URL data222"+result);
 			 out.println("JSON reponse for the servlet in INSERT"+jsonData);
 
@@ -115,9 +122,9 @@ public class CreateAlchemy extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-				
-		
-		
+
+
+
        PrintWriter pw = response.getWriter();
 
 		/*DaoAlchemy dbconfig = new DaoAlchemy();
@@ -136,19 +143,19 @@ public class CreateAlchemy extends HttpServlet {
 		System.out.println("In the edit system call for editAlchemy");
 		String id = request.getParameter("id");
 		DaoAlchemy daoId = new DaoAlchemy();
-		 Brotherhood updateResult = daoId.fetchEdit(id);
-		 System.out.println("URL data111"+updateResult);
+		 Brotherhood fetchResult = daoId.fetchEdit(id);
+		 System.out.println("URL data111"+fetchResult);
 
 		 response.setCharacterEncoding("UTF-8");
          response.setContentType("application/json; charset=utf-8");
 
          Gson gson = new Gson();
 
-         String jsonData = gson.toJson(updateResult);
+         String jsonData = gson.toJson(fetchResult);
 
          PrintWriter out = response.getWriter();
 
-		 System.out.println("URL data222"+updateResult);
+		 System.out.println("URL data222"+fetchResult);
 		 out.println(jsonData);
 	}
 
@@ -156,6 +163,12 @@ public class CreateAlchemy extends HttpServlet {
 
 		System.out.println("Called the delete button ");
 	}
+
+	protected void updateAlchemy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		System.out.println("Called the update button ");
+	}
+
 
 
 
