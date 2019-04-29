@@ -84,52 +84,65 @@ public class CreateAlchemy extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	//	doGet(request, response);
-
-		String Fname = request.getParameter("Fname");
-		System.out.println(Fname);
-		String Lname = request.getParameter("Lname");
-		System.out.println(Lname);
-		String email = request.getParameter("email");
-		System.out.println(email);
-		String phone = request.getParameter("phone");
-		System.out.println(phone);
-//		String checkbox = request.getParameter("checkbox");
-//		String optradio = request.getParameter("optradio");
-//		String selected = request.getParameter("selected");
-
-
-
-		Brotherhood bh = new Brotherhood(Fname,Lname,email,phone);
+		String action = null;
 		DaoAlchemy doaInsert = new DaoAlchemy();
-		String result;
-		try {
-			result = doaInsert.insert(bh);
-			System.out.println(result);
+		if ("update".equals(request.getParameter("update"))) {
+			action = "update";
+			String Fname = request.getParameter("Fname");
+			System.out.println(Fname);
+			String Lname = request.getParameter("Lname");
+			System.out.println(Lname);
+			String email = request.getParameter("email");
+			System.out.println(email);
+			String phone = request.getParameter("phone");
+			System.out.println(phone);
+			
+			Brotherhood bh = new Brotherhood(Fname, Lname, email, phone)
+			result = doaInsert.update(bh);
+		} else {
+			
+			String Fname = request.getParameter("Fname");
+			System.out.println(Fname);
+			String Lname = request.getParameter("Lname");
+			System.out.println(Lname);
+			String email = request.getParameter("email");
+			System.out.println(email);
+			String phone = request.getParameter("phone");
+			System.out.println(phone);
 
-			 response.setCharacterEncoding("UTF-8");
-	         response.setContentType("application/json; charset=utf-8");
+			Brotherhood bh = new Brotherhood(Fname,Lname,email,phone);
+			
+			String result;
+			try {
+				result = doaInsert.insert(bh);
+				System.out.println(result);
 
-	         Gson gson = new Gson();
+				 response.setCharacterEncoding("UTF-8");
+		         response.setContentType("application/json; charset=utf-8");
 
-	         String jsonData = gson.toJson(result);
+		         Gson gson = new Gson();
 
-	         PrintWriter out = response.getWriter();
+		         String jsonData = gson.toJson(result);
 
-	    	 System.out.println("URL data222"+result);
-			 out.println("JSON reponse for the servlet in INSERT"+jsonData);
+		         PrintWriter out = response.getWriter();
 
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		    	 System.out.println("URL data222"+result);
+				 out.println("JSON reponse for the servlet in INSERT"+jsonData);
+
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
+		
+		
+
 
 
 
        PrintWriter pw = response.getWriter();
 
-		/*DaoAlchemy dbconfig = new DaoAlchemy();
-		Connection status = doaInsert.open();
-		if(status != null){*/
 			 List<Brotherhood> ls = doaInsert.fetchAllData();
 			System.out.println(ls);
 
@@ -165,6 +178,12 @@ public class CreateAlchemy extends HttpServlet {
 	}
 
 	protected void updateAlchemy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		System.out.println("Called the update button ");
+	}
+	
+	
+	protected void listAlchemy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		System.out.println("Called the update button ");
 	}

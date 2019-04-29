@@ -117,6 +117,28 @@ public class DaoAlchemy {
 	}
 	
 	
+	public String update(Brotherhood data) throws ClassNotFoundException {
+		String sql = "Insert into EMPLOYEES (FIRST_NAME,LAST_NAME,EMAIL,PHONE_NUMBER) VALUES (?,?,?,?)";
+
+		try {
+			Connection con2 = DbConnect.getConnection();
+
+			PreparedStatement state = con2.prepareStatement(sql);
+			state.setString(1,data.getFIRST_NAME());
+			state.setString(2,data.getLAST_NAME());
+			state.setString(3,data.getEMAIL());
+			state.setString(4,data.getPHONE_NUMBER());
+			int rs=state.executeUpdate();
+
+			state.close();
+			DbConnect.closeConnection(con2);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "Insert";
+	}
+	
+	
 	
 	
 }
