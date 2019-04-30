@@ -42,7 +42,7 @@ public class CreateAlchemy extends HttpServlet {
 
 
 		if("fetch".equals(request.getParameter("fetch"))) {
-			System.out.println("In if call");
+			System.out.println("In if call for fetch");
 			action = request.getParameter("fetch");
 			System.out.println("called action data for url ===>"+action);
 		}
@@ -51,8 +51,13 @@ public class CreateAlchemy extends HttpServlet {
 			System.out.println("called action data for url ===>"+action);
 		}
 		else if("update".equals(request.getParameter("update"))) {
-			System.out.println("In if call");
+			System.out.println("In if call for update");
 			action = request.getParameter("update");
+			System.out.println("called action data for url ===>"+action);
+
+		}else if("list".equals(request.getParameter("list"))) {
+			System.out.println("In if call for list");
+			action = request.getParameter("list");
 			System.out.println("called action data for url ===>"+action);
 		}
 
@@ -60,7 +65,7 @@ public class CreateAlchemy extends HttpServlet {
 		try {
             switch(action){
             case "null":
-            	doPost(request,response);
+            	listAlchemy(request,response);
                 break;
             case "fetch":
             	editAlchemy(request,response);
@@ -71,6 +76,10 @@ public class CreateAlchemy extends HttpServlet {
             case "update":
             	updateAlchemy(request,response);
                 break;
+            case "list":
+            	listAlchemy(request,response);
+                break;
+
             }
 	 } catch (Exception ex) {
             throw new ServletException(ex);
@@ -88,30 +97,37 @@ public class CreateAlchemy extends HttpServlet {
 		DaoAlchemy doaInsert = new DaoAlchemy();
 		if ("update".equals(request.getParameter("update"))) {
 			action = "update";
-			String Fname = request.getParameter("Fname");
+			int empId = Integer.parseInt(request.getParameter("id"));
+			System.out.println(empId);
+			String Fname = request.getParameter("fname");
 			System.out.println(Fname);
-			String Lname = request.getParameter("Lname");
-			System.out.println(Lname);
-			String email = request.getParameter("email");
-			System.out.println(email);
-			String phone = request.getParameter("phone");
-			System.out.println(phone);
-			
-			Brotherhood bh = new Brotherhood(Fname, Lname, email, phone)
-			result = doaInsert.update(bh);
-		} else {
-			
-			String Fname = request.getParameter("Fname");
-			System.out.println(Fname);
-			String Lname = request.getParameter("Lname");
+			String Lname = request.getParameter("lname");
 			System.out.println(Lname);
 			String email = request.getParameter("email");
 			System.out.println(email);
 			String phone = request.getParameter("phone");
 			System.out.println(phone);
 
+			Brotherhood bh = new Brotherhood(empId,Fname, Lname, email, phone);
+			try {
+				String result = doaInsert.update(bh);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+
+			String Fname = request.getParameter("fname");
+			System.out.println("Fname"+Fname);
+			String Lname = request.getParameter("lname");
+			System.out.println("Lname"+Lname);
+			String email = request.getParameter("email");
+			System.out.println("email"+email);
+			String phone = request.getParameter("phone");
+			System.out.println("phone"+phone);
+
 			Brotherhood bh = new Brotherhood(Fname,Lname,email,phone);
-			
+
 			String result;
 			try {
 				result = doaInsert.insert(bh);
@@ -127,29 +143,14 @@ public class CreateAlchemy extends HttpServlet {
 		         PrintWriter out = response.getWriter();
 
 		    	 System.out.println("URL data222"+result);
-				 out.println("JSON reponse for the servlet in INSERT"+jsonData);
+				 out.println(jsonData);
 
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
-		
-		
-
-
-
-
-       PrintWriter pw = response.getWriter();
-
-			 List<Brotherhood> ls = doaInsert.fetchAllData();
-			System.out.println(ls);
-
-			request.setAttribute("list", ls);
-			RequestDispatcher rd = request.getRequestDispatcher("createAlchemyTable.jsp");
-
-			rd.forward(request, response);
 	}
 
 	protected void editAlchemy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -181,11 +182,33 @@ public class CreateAlchemy extends HttpServlet {
 
 		System.out.println("Called the update button ");
 	}
-	
-	
-	protected void listAlchemy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		System.out.println("Called the update button ");
+
+	protected void listAlchemy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("After the if else statement");
+		PrintWriter pw = response.getWriter();
+		DaoAlchemy doalist = new DaoAlchemy();
+		 List<Brotherhood> ls = doalist.fetchAllData();
+		System.out.println(ls);
+
+
+
+		 response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json; charset=utf-8");
+
+        Gson gson = new Gson();
+
+        String jsonData = gson.toJson(ls);
+
+        PrintWriter out = response.getWriter();
+
+        out.println(jsonData);
+
+//		request.setAttribute("list", ls);
+//		RequestDispatcher rd = request.getRequestDispatcher("createAlchemyTable.jsp");
+//
+//		rd.forward(request, response);
+//		System.out.println("Called the update button ");
 	}
 
 

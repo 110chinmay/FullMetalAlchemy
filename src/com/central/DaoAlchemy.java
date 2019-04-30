@@ -24,7 +24,7 @@ public class DaoAlchemy {
 			con_1= DbConnect.getConnection();
 			stat_1 = con_1.createStatement();
 
-			stat_1.execute("CREATE TABLE IF NOT EXISTS employees (EMPLOYEE_ID INTEGER,'FIRST_NAME' TEXT,LAST_NAME TEXT,EMAIL TEXT,PHONE_NUMBER TEXT,HIRE_DATE NUMERIC)");
+			stat_1.execute("CREATE TABLE IF NOT EXISTS employees (EMPLOYEE_ID INTEGER PRIMARY KEY AUTOINCREMENT,FIRST_NAME TEXT,LAST_NAME TEXT,EMAIL TEXT,PHONE_NUMBER TEXT,HIRE_DATE NUMERIC)");
 		}catch(Exception e){
 			System.out.println(e);
 		}finally {
@@ -115,10 +115,10 @@ public class DaoAlchemy {
 		}
 		return BH;
 	}
-	
-	
+
+
 	public String update(Brotherhood data) throws ClassNotFoundException {
-		String sql = "Insert into EMPLOYEES (FIRST_NAME,LAST_NAME,EMAIL,PHONE_NUMBER) VALUES (?,?,?,?)";
+		String sql = "update EMPLOYEES set FIRST_NAME=?,LAST_NAME=?,EMAIL=?,PHONE_NUMBER=? where EMPLOYEE_ID = ?";
 
 		try {
 			Connection con2 = DbConnect.getConnection();
@@ -128,6 +128,7 @@ public class DaoAlchemy {
 			state.setString(2,data.getLAST_NAME());
 			state.setString(3,data.getEMAIL());
 			state.setString(4,data.getPHONE_NUMBER());
+			state.setInt(5,data.getEMPLOYEE_ID());
 			int rs=state.executeUpdate();
 
 			state.close();
@@ -137,8 +138,8 @@ public class DaoAlchemy {
 		}
 		return "Insert";
 	}
-	
-	
-	
-	
+
+
+
+
 }

@@ -15,15 +15,22 @@ public class Brotherhood {
 	private int COMMISSION_PCT ;
 	private int MANAGER_ID  ;
 	private int DEPARTMENT_ID  ;
-	
+
 	public Brotherhood(String fIRST_NAME, String lAST_NAME, String eMAIL, String pHONE_NUMBER) {
 		this.FIRST_NAME = fIRST_NAME;
 		this.LAST_NAME = lAST_NAME;
 		this.EMAIL = eMAIL;
 		this.PHONE_NUMBER = pHONE_NUMBER;
-		
+
 	}
 	public Brotherhood() {
+	}
+	public Brotherhood(int eMPLOYEE_ID, String fIRST_NAME, String lAST_NAME, String eMAIL, String pHONE_NUMBER) {
+		this.EMPLOYEE_ID = eMPLOYEE_ID;
+		this.FIRST_NAME = fIRST_NAME;
+		this.LAST_NAME = lAST_NAME;
+		this.EMAIL = eMAIL;
+		this.PHONE_NUMBER = pHONE_NUMBER;
 	}
 	public int getEMPLOYEE_ID() {
 		return EMPLOYEE_ID;

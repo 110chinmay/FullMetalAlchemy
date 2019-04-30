@@ -14,7 +14,6 @@
 <body>
 <div class="container">
   <h2>FullMetal Create</h2>
-  <form action="./CreateAlchemy" method="post">
   	<div class="row">
 	  	<div class="col-sm-4">
 	      <label for="Fname">FirstName:</label>
@@ -37,9 +36,52 @@
 		    </div>
   		</div>
 	<div class = 'row' style="margin-top: 15px;margin-left: 0px">
-		 <button type="submit" class="btn btn-default">Submit</button>
+		 <button onclick="insert();" class="btn btn-default">Submit</button>
 	</div>
-  </form>
 </div>
 </body>
+<script>
+
+
+function insert(){
+	  var fname=$('#Fname').val();
+	  var lname=$('#Lname').val();
+	  var email=$('#email').val();
+	  var phone=$('#phone').val();
+
+	  var data = {'fname':fname,'lname':lname,'email':email,'phone':phone};
+
+	  $.ajax({
+		  type:"POST",
+	       url: "./CreateAlchemy",
+	        data: data,
+	        success: function(data){
+	          alert("Request successful");
+	          if(data = 'Insert')
+	          location.href = "createAlchemyTable.jsp";
+
+	          var html = "<table border='1|1'>";
+
+	          for (var i = 0; i < rows.length; i++) {
+	              html+="<tr>";
+	              html+="<td>"+rows[i]._id+"</td>";
+	              html+="<td>"+rows[i].usrName+"</td>";
+	              html+="<td>"+rows[i].usrMobile+"</td>";
+	              html+="<td>"+rows[i].usrAddress+"</td>";
+	              html+="<td>"+rows[i].radioValue+"</td>";
+	              html+="<td>"+rows[i].selData+"</td>";
+	              html+="<td>"+"<button class='btn btn-primary' value='Update' onclick=\"(updateUsr('"+rows[i]._id+" '))\">Update</button>"+"</td>";
+	              html+="</tr>";
+	          }
+	        },
+	        error: function (data){
+	            alert("Request failed! some thing went wrong!!");
+	        }
+	  });
+
+	  console.log(data);
+}
+
+
+</script>
 </html>

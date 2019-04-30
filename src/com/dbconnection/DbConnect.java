@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class DbConnect {
 	private static Connection con=null;
-	
+
 	private DbConnect() {}
-	
+
 	public static Connection getConnection() {
 		System.out.println("In Connection :: getConnection");
 		if(con==null) {
@@ -18,7 +18,7 @@ public class DbConnect {
 			try {
 				Class.forName("org.sqlite.JDBC");
 				//step2 create  the connection object
-			    con = DriverManager.getConnection("jdbc:sqlite:E:\\testdb_1.db");
+			    con = DriverManager.getConnection("jdbc:sqlite:E:\\testdb_3.db");
 			    System.out.println("new connection has created");
 			} catch (ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
@@ -27,7 +27,7 @@ public class DbConnect {
 
 
 		}
-		
+
 		return con;
 	}
 	public static void closeConnection(Connection local_con) {
@@ -42,7 +42,7 @@ public class DbConnect {
 				System.out.println("Error while closing global connection= "+e);
 			}
 		}
-		
+
 		if(local_con!=null) {
 			try {
 				local_con.close();
@@ -54,7 +54,7 @@ public class DbConnect {
 				System.out.println("Error while closing local_con connection= "+e);
 			}
 		}
-		
+
 	}
 
 }

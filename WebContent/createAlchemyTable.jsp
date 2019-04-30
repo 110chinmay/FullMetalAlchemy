@@ -23,6 +23,32 @@ tr:nth-child(even) {
 }
 </style>
 </head>
+<script>
+
+$( document ).ready(function() {
+	var list = 'list';
+	var data = {'list':list};
+	console.log(data);
+    $.ajax({
+        type: "GET",
+        url: "./CreateAlchemy",
+        data: data,
+        success: function(data){
+            alert("Request successful");
+            console.log(data);
+           /* $('#Fname').val(data.FIRST_NAME);
+            $('#Lname').val(data.LAST_NAME);
+            $('#email').val(data.EMAIL);
+            $('#phone').val(data.PHONE_NUMBER);*/
+
+        },
+        error: function (data){
+            alert("Request failed!");
+        }
+    });
+});
+
+</script>
 <body>
 
 <h2>HTML Table</h2>
@@ -36,7 +62,9 @@ tr:nth-child(even) {
     <th>Ops(Edit)</th>
     <th>Ops(Delete)</th>
   </tr>
-  <c:forEach var="book" items="${list}">
+  <form action = "./CreateAlchemy" method = "GET">
+
+    <c:forEach var="book" items="${list}">
                 <tr>
                     <td><c:out value="${book.EMPLOYEE_ID}" /></td>
                     <td><c:out value="${book.FIRST_NAME}" /></td>
@@ -50,27 +78,10 @@ tr:nth-child(even) {
                     </td>
                 </tr>
             </c:forEach>
+
+  </form>
+
 </table>
 
 </body>
-
-<script>
-function edit(id){
-	alert('Supp'+id);
-	var update = 'update'
-	var data = {'id':id,'update':update};
-    $.ajax({
-        type: "GET",
-        url: "./CreateAlchemy",
-        data: data,
-        success: function(data){
-
-            alert("Request successful");
-        },
-        error: function (data){
-            alert("sorry payment failed");
-        }
-    });
-}
-</script>
 </html>
