@@ -116,12 +116,8 @@ function update(){
 	       url: "./CreateAlchemy",
 	        data: data,
 	        success: function(data){
-	          alert("Request successful");
 	            console.log(data);
-	            $('#Fname').val(data.FIRST_NAME);
-	            $('#Lname').val(data.LAST_NAME);
-	            $('#email').val(data.EMAIL);
-	            $('#phone').val(data.PHONE_NUMBER);
+	            location.href = "createAlchemyTable.jsp";
 	        },
 	        error: function (data){
 	            alert("Request failed!");

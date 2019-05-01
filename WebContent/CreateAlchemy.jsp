@@ -56,23 +56,7 @@ function insert(){
 	       url: "./CreateAlchemy",
 	        data: data,
 	        success: function(data){
-	          alert("Request successful");
-	          if(data = 'Insert')
 	          location.href = "createAlchemyTable.jsp";
-
-	          var html = "<table border='1|1'>";
-
-	          for (var i = 0; i < rows.length; i++) {
-	              html+="<tr>";
-	              html+="<td>"+rows[i]._id+"</td>";
-	              html+="<td>"+rows[i].usrName+"</td>";
-	              html+="<td>"+rows[i].usrMobile+"</td>";
-	              html+="<td>"+rows[i].usrAddress+"</td>";
-	              html+="<td>"+rows[i].radioValue+"</td>";
-	              html+="<td>"+rows[i].selData+"</td>";
-	              html+="<td>"+"<button class='btn btn-primary' value='Update' onclick=\"(updateUsr('"+rows[i]._id+" '))\">Update</button>"+"</td>";
-	              html+="</tr>";
-	          }
 	        },
 	        error: function (data){
 	            alert("Request failed! some thing went wrong!!");

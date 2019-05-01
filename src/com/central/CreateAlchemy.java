@@ -73,13 +73,9 @@ public class CreateAlchemy extends HttpServlet {
             case "delete":
                 deleteAlchemy(request, response);
                 break;
-            case "update":
-            	updateAlchemy(request,response);
-                break;
             case "list":
             	listAlchemy(request,response);
                 break;
-
             }
 	 } catch (Exception ex) {
             throw new ServletException(ex);
@@ -112,7 +108,7 @@ public class CreateAlchemy extends HttpServlet {
 			try {
 				String result = doaInsert.update(bh);
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
+				//	 TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {
@@ -174,14 +170,27 @@ public class CreateAlchemy extends HttpServlet {
 	}
 
 	protected void deleteAlchemy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id1= request.getParameter("EMPLOYEE_ID");
+		System.out.println(id1);
+		int id = Integer.parseInt(request.getParameter("EMPLOYEE_ID"));
+		DaoAlchemy daoId = new DaoAlchemy();
+		int ls = daoId.delete(id);
+		 response.setCharacterEncoding("UTF-8");
+	        response.setContentType("application/json; charset=utf-8");
 
-		System.out.println("Called the delete button ");
+	        Gson gson = new Gson();
+
+	        String jsonData = gson.toJson(ls);
+
+	        PrintWriter out = response.getWriter();
+
+	        out.println(jsonData);
 	}
 
-	protected void updateAlchemy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		System.out.println("Called the update button ");
-	}
+//	protected void updateAlchemy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//
+//		System.out.println("Called the update button ");
+//	}
 
 
 	protected void listAlchemy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

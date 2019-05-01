@@ -5,6 +5,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.css">
 <style>
 table {
   font-family: arial, sans-serif;
@@ -23,6 +25,26 @@ tr:nth-child(even) {
 }
 </style>
 </head>
+<body>
+
+<h2>Alchemy List</h2>
+
+<table id = 'table_data' data-height="460">
+<thead>
+  <tr>
+    <th data-field="EMPLOYEE_ID">EMPLOYEE_ID</th>
+    <th data-field="FIRST_NAME">FIRST_NAME</th>
+    <th data-field="LAST_NAME">LAST_NAME</th>
+    <th data-field="EMAIL">EMAIL</th>
+    <th data-field="EMPLOYEE_ID">Ops(Edit)</th>
+    <th data-field="EMPLOYEE_ID">Ops(Delete)</th>
+  </tr>
+</thead>
+
+        <tr></tr>  
+</table>
+
+</body>
 <script>
 
 $( document ).ready(function() {
@@ -34,13 +56,29 @@ $( document ).ready(function() {
         url: "./CreateAlchemy",
         data: data,
         success: function(data){
-            alert("Request successful");
-            console.log(data);
-           /* $('#Fname').val(data.FIRST_NAME);
-            $('#Lname').val(data.LAST_NAME);
-            $('#email').val(data.EMAIL);
-            $('#phone').val(data.PHONE_NUMBER);*/
+			/* console.log(data);
+			 $('#table_data').bootstrapTable({
+			        data: data
+			    }); */
+			
+	 		var html = "<table border='1|1'>";	
 
+			
+            for (var i=0;i<=(data.length-1);i++){
+            	
+            	 html+="<tr>";
+                 html+="<td>"+data[i].EMPLOYEE_ID+"</td>";
+                 html+="<td>"+data[i].FIRST_NAME+"</td>";
+                 html+="<td>"+data[i].LAST_NAME+"</td>";
+                 html+="<td>"+data[i].EMAIL+"</td>";
+                 html+="<td>"+"<button class='btn btn-primary' value='Update' onclick=\"(updateAlchemy('"+data[i].EMPLOYEE_ID+" '))\">Update</button>"+"</td>";
+                 html+="<td>"+"<button class='btn btn-warning' value='Delete' onclick=\"(deleteAlchemy('"+data[i].EMPLOYEE_ID+" '))\">Delete</button>"+"</td>";
+                 html+="</tr>";
+            	
+             } 
+             html+="</table>";
+            document.getElementById("table_data").innerHTML = html; 
+            
         },
         error: function (data){
             alert("Request failed!");
@@ -48,40 +86,29 @@ $( document ).ready(function() {
     });
 });
 
+
+function updateAlchemy(EMPLOYEE_ID){
+	location.href="editAlchemy.jsp?"+EMPLOYEE_ID+"";
+}
+
+function deleteAlchemy(EMPLOYEE_ID){
+	
+	location.href="editAlchemy.jsp?"+EMPLOYEE_ID+"";
+	var deletee = "delete";
+	var data = {'EMPLOYEE_ID':EMPLOYEE_ID,'delete':deletee};
+	  $.ajax({
+		  type:"GET",
+	       url: "./CreateAlchemy",
+	        data: data,
+	        success: function(data){
+	            console.log(data);
+	            location.href = "createAlchemyTable.jsp";
+	        },
+	        error: function (data){
+	            alert("Request failed!");
+	        } 
+	  });
+}
+
 </script>
-<body>
-
-<h2>HTML Table</h2>
-
-<table>
-  <tr>
-    <th>EMPLOYEE_ID</th>
-    <th>FIRST_NAME</th>
-    <th>LAST_NAME</th>
-    <th>EMAIL</th>
-    <th>Ops(Edit)</th>
-    <th>Ops(Delete)</th>
-  </tr>
-  <form action = "./CreateAlchemy" method = "GET">
-
-    <c:forEach var="book" items="${list}">
-                <tr>
-                    <td><c:out value="${book.EMPLOYEE_ID}" /></td>
-                    <td><c:out value="${book.FIRST_NAME}" /></td>
-                    <td><c:out value="${book.LAST_NAME}" /></td>
-                    <td><c:out value="${book.EMAIL}" /></td>
-                    <td>
-                    <a class='btn btn-success' href="editAlchemy.jsp?id=<c:out value='${book.EMPLOYEE_ID}' />">Update</a>
-                     </td>
-                     <td>
-                      <a class='btn btn-warning' href="editAlchemy.jsp?id=<c:out value='${book.EMPLOYEE_ID}' />">Delete</a>
-                    </td>
-                </tr>
-            </c:forEach>
-
-  </form>
-
-</table>
-
-</body>
 </html>

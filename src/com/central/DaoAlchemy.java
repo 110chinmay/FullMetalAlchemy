@@ -138,6 +138,23 @@ public class DaoAlchemy {
 		}
 		return "Insert";
 	}
+	
+	public int delete(int id) {
+		Connection con = null;
+		int delStatus1= 0;
+		String sql="delete from employees where id = ?";
+		try {
+			con = DbConnect.getConnection();
+			PreparedStatement prepareStatement =  con.prepareStatement(sql);
+			prepareStatement.setInt(1,id);
+			  delStatus1 = prepareStatement.executeUpdate(); 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return delStatus1;
+		
+	}
 
 
 
