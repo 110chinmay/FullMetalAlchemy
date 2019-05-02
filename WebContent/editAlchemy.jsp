@@ -56,7 +56,8 @@ tr:nth-child(even) {
 		    </div>
   		</div>
 	<div class = 'row' style="margin-top: 15px;margin-left: 0px">
-		 <button onclick="update();" class="btn btn-default">Submit</button>
+		 <button onclick="update();" class="btn btn-primary">Submit</button>
+		 <button onclick="Cancel();" class="btn btn-warning">Cancel</button>
 	</div>
 
 </div>
@@ -108,9 +109,9 @@ function update(){
 	  var lname=$('#Lname').val();
 	  var email=$('#email').val();
 	  var phone=$('#phone').val();
-	  
+
 	  var data = {'update':update,'id':id,'fname':fname,'lname':lname,'email':email,'phone':phone};
-	  
+
 	  $.ajax({
 		  type:"POST",
 	       url: "./CreateAlchemy",
@@ -121,10 +122,14 @@ function update(){
 	        },
 	        error: function (data){
 	            alert("Request failed!");
-	        } 
+	        }
 	  });
 
 	  console.log(data);
+}
+
+function Cancel(){
+	location.href='createAlchemyTable.jsp';
 }
 </script>
 </html>

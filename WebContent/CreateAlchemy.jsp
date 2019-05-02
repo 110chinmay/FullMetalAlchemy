@@ -13,6 +13,7 @@
 </head>
 <body>
 <div class="container">
+	<button style='margin-top:10px;' class = 'btn btn-success' onclick = 'List()'>Alchemy List</button>
   <h2>FullMetal Create</h2>
   	<div class="row">
 	  	<div class="col-sm-4">
@@ -36,7 +37,8 @@
 		    </div>
   		</div>
 	<div class = 'row' style="margin-top: 15px;margin-left: 0px">
-		 <button onclick="insert();" class="btn btn-default">Submit</button>
+		 <button onclick="insert();" class="btn btn-primary">Submit</button>
+		 <button onclick="Cancel();" class="btn btn-warning">Cancel</button>
 	</div>
 </div>
 </body>
@@ -64,6 +66,14 @@ function insert(){
 	  });
 
 	  console.log(data);
+}
+
+function List(){
+	location.href = 'createAlchemyTable.jsp';
+}
+
+function Cancel(){
+	location.href='createAlchemyTable.jsp';
 }
 
 
