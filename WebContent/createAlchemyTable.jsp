@@ -27,8 +27,9 @@ tr:nth-child(even) {
 </head>
 <body>
 
-<h2>Alchemy List</h2>
-<a href = 'CreateAlchemy.jsp'>Create Alchemy</a>
+<h2 style = 'margin-left: 10px;'>Alchemy List</h2>
+<button style = 'margin-bottom: 10px;margin-left: 10px;' class = 'btn btn-success' onclick = 'createAlLink()' >Create Alchemy</button>
+
 
 <table id = 'table_data' data-height="460">
 <thead>
@@ -62,7 +63,7 @@ $( document ).ready(function() {
 			        data: data
 			    }); */
 
-	 		var html = "<table border='1|1'>";
+	 		var html = "<tbody>";
 
 
             for (var i=0;i<=(data.length-1);i++){
@@ -77,8 +78,8 @@ $( document ).ready(function() {
                  html+="</tr>";
 
              }
-             html+="</table>";
-            document.getElementById("table_data").innerHTML = html;
+             html+="</tbody>";
+             $("#table_data").append(html);
 
         },
         error: function (data){
@@ -107,6 +108,10 @@ function deleteAlchemy(EMPLOYEE_ID){
 	            alert("Request failed!");
 	        }
 	  });
+}
+
+function createAlLink(){
+	location.href="CreateAlchemy.jsp";
 }
 
 </script>
