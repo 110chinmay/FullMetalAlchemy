@@ -2,6 +2,7 @@
 #Basic
 #Servlet
 #JSP
+#JDBC
 #SQLITE
 
 Java CRUD OPERATION using SERVLET JSP SQLITE
