@@ -37,10 +37,6 @@ public class CreateAlchemy extends HttpServlet {
 
 		System.out.println("CAll in the doget method");
 
-		String test = request.getParameter("fetch");
-		System.out.println("request get parameter test"+test);
-
-
 		if("fetch".equals(request.getParameter("fetch"))) {
 			System.out.println("In if call for fetch");
 			action = request.getParameter("fetch");
@@ -172,7 +168,7 @@ public class CreateAlchemy extends HttpServlet {
 	protected void deleteAlchemy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id1= request.getParameter("EMPLOYEE_ID");
 		System.out.println(id1);
-		int id = Integer.parseInt(request.getParameter("EMPLOYEE_ID"));
+		int id = Integer.parseInt(id1.trim());
 		DaoAlchemy daoId = new DaoAlchemy();
 		int ls = daoId.delete(id);
 		 response.setCharacterEncoding("UTF-8");
@@ -187,22 +183,13 @@ public class CreateAlchemy extends HttpServlet {
 	        out.println(jsonData);
 	}
 
-//	protected void updateAlchemy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//
-//		System.out.println("Called the update button ");
-//	}
-
 
 	protected void listAlchemy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("After the if else statement");
 		PrintWriter pw = response.getWriter();
 		DaoAlchemy doalist = new DaoAlchemy();
 		 List<Brotherhood> ls = doalist.fetchAllData();
-		System.out.println(ls);
-
-
-
-		 response.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json; charset=utf-8");
 
         Gson gson = new Gson();
@@ -212,12 +199,6 @@ public class CreateAlchemy extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         out.println(jsonData);
-
-//		request.setAttribute("list", ls);
-//		RequestDispatcher rd = request.getRequestDispatcher("createAlchemyTable.jsp");
-//
-//		rd.forward(request, response);
-//		System.out.println("Called the update button ");
 	}
 
 

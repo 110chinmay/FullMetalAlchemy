@@ -28,6 +28,7 @@ tr:nth-child(even) {
 <body>
 
 <h2>Alchemy List</h2>
+<a href = 'CreateAlchemy.jsp'>Create Alchemy</a>
 
 <table id = 'table_data' data-height="460">
 <thead>
@@ -41,7 +42,7 @@ tr:nth-child(even) {
   </tr>
 </thead>
 
-        <tr></tr>  
+        <tr></tr>
 </table>
 
 </body>
@@ -60,12 +61,12 @@ $( document ).ready(function() {
 			 $('#table_data').bootstrapTable({
 			        data: data
 			    }); */
-			
-	 		var html = "<table border='1|1'>";	
 
-			
+	 		var html = "<table border='1|1'>";
+
+
             for (var i=0;i<=(data.length-1);i++){
-            	
+
             	 html+="<tr>";
                  html+="<td>"+data[i].EMPLOYEE_ID+"</td>";
                  html+="<td>"+data[i].FIRST_NAME+"</td>";
@@ -74,11 +75,11 @@ $( document ).ready(function() {
                  html+="<td>"+"<button class='btn btn-primary' value='Update' onclick=\"(updateAlchemy('"+data[i].EMPLOYEE_ID+" '))\">Update</button>"+"</td>";
                  html+="<td>"+"<button class='btn btn-warning' value='Delete' onclick=\"(deleteAlchemy('"+data[i].EMPLOYEE_ID+" '))\">Delete</button>"+"</td>";
                  html+="</tr>";
-            	
-             } 
+
+             }
              html+="</table>";
-            document.getElementById("table_data").innerHTML = html; 
-            
+            document.getElementById("table_data").innerHTML = html;
+
         },
         error: function (data){
             alert("Request failed!");
@@ -92,8 +93,6 @@ function updateAlchemy(EMPLOYEE_ID){
 }
 
 function deleteAlchemy(EMPLOYEE_ID){
-	
-	location.href="editAlchemy.jsp?"+EMPLOYEE_ID+"";
 	var deletee = "delete";
 	var data = {'EMPLOYEE_ID':EMPLOYEE_ID,'delete':deletee};
 	  $.ajax({
@@ -106,7 +105,7 @@ function deleteAlchemy(EMPLOYEE_ID){
 	        },
 	        error: function (data){
 	            alert("Request failed!");
-	        } 
+	        }
 	  });
 }
 
